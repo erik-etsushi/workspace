@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head>Students</h:head> 
+<h:body> 
+	<h:form>
+		<div>
+			<p:outputLabel value="First Name" />
+			<p:inputText value="#{studentMB.estudante.nome}" />
+		</div>
+		<div>
+			<p:outputLabel value="Last Name" />
+			<p:inputText value="#{studentMB.estudante.sobrenome}" />
+		</div>
+		<div>
+			<p:outputLabel value="Standerd" />
+			<p:inputText value="#{studentMB.estudante.serie}" />
+		</div>
+		<div>
+
+					<p:commandButton action="#{studentMB.createStudent()}" value="Create" />
+
+		</div>
+	</h:form>
+	<table border="solid" cellpadding="2" cellspacing="3">
+		<thead>
+			<th>Nome</th>
+			<th>serie</th>
+			<th></th>
+			<th></th>
+		</thead>
+		<tbody>
+			<ui:repeat var="stud" value="#{studentMB.getAllStudents()}">
+				<tr>
+					<td>#{stud.nome} #{stud.sobrenome}</td>
+					<td>#{stud.serie}</td>
+					<td>
+						<h:form>
+							<h:commandLink action="#{studentMB.getStudent(stud.id)}" value="Edit" />
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink action="#{studentMB.deleteStudent(stud.id)}" value="Delete" />
+						</h:form>					
+					</td>
+				</tr>
+			</ui:repeat>
+		</tbody>
+	</table>
+</h:body> 
+</html>
